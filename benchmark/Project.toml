@@ -1,0 +1,14 @@
+[deps]
+AirspeedVelocity = "1c8270ee-6884-45cc-9545-60fa71ec23e4"
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
+NeoGP = "fe65fcaf-0a20-4e9a-99a2-9f417ca4b589"
+Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[sources]
+NeoGP = {path = ".."}
+
+[compat]
+AirspeedVelocity = "0.6"
+BenchmarkTools = "1"
+NeoGP = "0.1"
+julia = "1.13"

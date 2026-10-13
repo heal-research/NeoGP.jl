@@ -1,0 +1,5 @@
+[deps]
+NeoGP = "fe65fcaf-0a20-4e9a-99a2-9f417ca4b589"
+
+[sources]
+NeoGP = {path = ".."}

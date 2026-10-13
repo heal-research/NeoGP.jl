@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1791885074350,
+  "lastUpdate": 1791900893701,
   "repoUrl": "https://github.com/heal-research/NeoGP.jl",
   "entries": {
     "NeoGP": [
@@ -430,6 +430,222 @@ window.BENCHMARK_DATA = {
           {
             "name": "pow-log-exp scatter likelihood/optimize!/Float64 / 500 observations",
             "value": 362726.5,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=784\nallocs=18\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "gabriel.kronberger@heuristiclab.com",
+            "name": "Gabriel Kronberger",
+            "username": "gkronber"
+          },
+          "committer": {
+            "email": "gabriel.kronberger@heuristiclab.com",
+            "name": "Gabriel Kronberger",
+            "username": "gkronber"
+          },
+          "distinct": true,
+          "id": "03d2763476cc5610e725b8bf10dcb1338d0358e3",
+          "message": "Link to python bindings.",
+          "timestamp": "2026-10-13T16:13:45+02:00",
+          "tree_id": "81280d53361de5bd8dec33a1c3d17fc821f829a4",
+          "url": "https://github.com/heal-research/NeoGP.jl/commit/03d2763476cc5610e725b8bf10dcb1338d0358e3"
+        },
+        "date": 1791900893052,
+        "tool": "julia",
+        "benches": [
+          {
+            "name": "gaussian likelihood/AIC/Float32 / 500 observations",
+            "value": 1533,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/AIC/Float32 / 5000 observations",
+            "value": 8416,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/AIC/Float64 / 500 observations",
+            "value": 1803,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=176\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/AIC/Float64 / 5000 observations",
+            "value": 13385,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=176\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/BIC/Float32 / 500 observations",
+            "value": 1583,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/BIC/Float32 / 5000 observations",
+            "value": 8887,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/BIC/Float64 / 500 observations",
+            "value": 1643,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=176\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/BIC/Float64 / 5000 observations",
+            "value": 14577,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=176\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/description_length/Float32 / 500 observations",
+            "value": 27271,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=2432\nallocs=44\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/description_length/Float32 / 5000 observations",
+            "value": 236944,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=2432\nallocs=44\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/description_length/Float64 / 500 observations",
+            "value": 43692,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=3024\nallocs=44\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/description_length/Float64 / 5000 observations",
+            "value": 464689,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=3024\nallocs=44\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/fractional_bayes_factor/Float32 / 500 observations",
+            "value": 2554,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=928\nallocs=20\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/fractional_bayes_factor/Float32 / 5000 observations",
+            "value": 9758,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=928\nallocs=20\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/fractional_bayes_factor/Float64 / 500 observations",
+            "value": 2485,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=944\nallocs=20\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/fractional_bayes_factor/Float64 / 5000 observations",
+            "value": 14347,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=944\nallocs=20\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/optimize!/Float32 / 500 observations",
+            "value": 11337.2,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=272\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/optimize!/Float32 / 5000 observations",
+            "value": 61535.2,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=272\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/optimize!/Float64 / 500 observations",
+            "value": 15108.3,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=272\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "gaussian likelihood/optimize!/Float64 / 5000 observations",
+            "value": 85210.4,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=272\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/description_length/Float32 / 500 observations",
+            "value": 297669,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=2816\nallocs=45\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/description_length/Float64 / 500 observations",
+            "value": 318174,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=3920\nallocs=45\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/negloglik/Float32 / 500 observations",
+            "value": 37330,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/negloglik/Float64 / 500 observations",
+            "value": 40665,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=208\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/optimize!/Float32 / 500 observations",
+            "value": 189542.3,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=304\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp profiled likelihood/optimize!/Float64 / 500 observations",
+            "value": 231522.7,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=320\nallocs=6\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/description_length/Float32 / 500 observations",
+            "value": 323595,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=2816\nallocs=45\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/description_length/Float64 / 500 observations",
+            "value": 368161,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=3920\nallocs=45\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/negloglik/Float32 / 500 observations",
+            "value": 38713,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=160\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/negloglik/Float64 / 500 observations",
+            "value": 44554,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=208\nallocs=4\nparams={\"evals\":1,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/optimize!/Float32 / 500 observations",
+            "value": 362326.2,
+            "unit": "ns",
+            "extra": "gctime=0\nmemory=752\nallocs=18\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
+          },
+          {
+            "name": "pow-log-exp scatter likelihood/optimize!/Float64 / 500 observations",
+            "value": 464954.9,
             "unit": "ns",
             "extra": "gctime=0\nmemory=784\nallocs=18\nparams={\"evals\":10,\"evals_set\":false,\"gcsample\":false,\"gctrial\":true,\"memory_tolerance\":0.01,\"overhead\":0,\"samples\":5,\"seconds\":5,\"time_tolerance\":0.05}"
           }

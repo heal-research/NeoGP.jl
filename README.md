@@ -16,7 +16,8 @@ with model-selection criteria, in particular the description length.
   while the models stay on the original scale.
 - Model selection ([SymRegModelSelection](https://github.com/gkronber/SymReg.jl)):
   description length, fractional Bayes factor, AIC and BIC.
-- A command line interface and a Julia API.
+- A command line interface, a Julia API, and Python bindings
+  ([pyNeoGP](https://github.com/heal-research/pyNeoGP)).
 
 ## Installation
 
@@ -117,6 +118,15 @@ defined on the original scale. For example, the radial acceleration relation
 
 The RMSE and R² columns of the output are computed on the scale of the likelihood,
 i.e. on the log-scaled data.
+
+## Python
+
+[pyNeoGP](https://github.com/heal-research/pyNeoGP) provides Python bindings to NeoGP; it installs
+Julia and NeoGP on first use:
+
+```bash
+pip install "git+https://github.com/heal-research/pyNeoGP"
+```
 
 ## Development
 

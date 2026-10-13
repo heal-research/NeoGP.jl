@@ -71,6 +71,9 @@ jobs:
       - uses: julia-actions/setup-julia@v3
         with:
           version: '1.13'
+      # julia-downgrade-compat keeps only path sources in the manifest.
+      - name: Check out the url sources as path sources
+        run: julia .github/scripts/url_sources_to_paths.jl . "$RUNNER_TEMP/sources"
       - uses: julia-actions/julia-downgrade-compat@v2
         with:
           skip: SymRegInterpreter,SymRegLikelihoods,SymRegModelSelection,DelimitedFiles,LinearAlgebra,Random,Test

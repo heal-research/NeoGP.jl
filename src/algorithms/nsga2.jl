@@ -183,7 +183,7 @@ function evolve!(alg::NSGA2, generations::Int=100; iter_callback=nothing, max_ti
     @timeit global_timer "evolve_generations" for _ in 1:generations
         # stop before a generation that would end after max_time (if it takes as long as the previous one)
         genstart = time()
-        genstart - start + lastduration > max_time && break
+        genstart - start + lastduration >= max_time && break
         alg.generation += 1
         gen = alg.generation
 

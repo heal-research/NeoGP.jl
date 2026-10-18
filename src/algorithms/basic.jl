@@ -41,6 +41,7 @@ mutable struct BasicAlgorithm{T <: AbstractFloat,
     const pop::Vector{I}                  # population of individuals
     const loss::Vector{T}                 # loss values of individuals in the population (= result of individual_loss_function.(pop))
     fevals::Int                           # number of function evaluations performed (includes function and gradient evaluations during parameter optimization)
+    generation::Int                       # number of generations run by `evolve!` (counted over all calls, seeds the offspring)
     const seed::Int
     const maxlen::Int                     # maximum code-length of individuals
     const tournamentsize::Int
@@ -92,7 +93,7 @@ function BasicAlgorithm(fitting_obj_func::LT,
     pop = Vector{I}(undef, popsize)
     loss = Vector{T}(undef, popsize)
     
-    alg = BasicAlgorithm{T,LT,F2,I}(fitting_obj_func, indiv_loss_func, pop, loss, 0, seed, maxlen,
+    alg = BasicAlgorithm{T,LT,F2,I}(fitting_obj_func, indiv_loss_func, pop, loss, 0, 0, seed, maxlen,
         tournamentsize, mutation_prob, crossover_prob,
         opcode_list(functionset), opcode_list(terminalset), numvars, threads, maxeval)
     
@@ -162,8 +163,9 @@ function select_tournament(pop, loss, tournamentsize)
     pop[bestidx]
 end
 
-function evolve!(alg::BasicAlgorithm, generations::Int=100; iter_callback=nothing)
+function evolve!(alg::BasicAlgorithm, generations::Int=100; iter_callback=nothing, max_time::Real=Inf)
     generations >= 1 || throw(ArgumentError("generations must be >= 1, got $generations"))
+    start = time()
     T = eltype(alg.loss) # loss value type (e.g., Float64)
     I = eltype(alg.pop)
     popsize = length(alg.pop)
@@ -175,7 +177,14 @@ function evolve!(alg::BasicAlgorithm, generations::Int=100; iter_callback=nothin
     evalworkers = start_fitness_eval_workers(lossevalqueue, resultqueue, alg.nthreads, alg.individual_loss_function, alg.maxeval)
 
     # generational replacement with one elite
-    @timeit global_timer "evolve_generations" for gen in 1:generations
+    lastduration = 0.0 # of the previous generation
+    @timeit global_timer "evolve_generations" for _ in 1:generations
+        # stop before a generation that would end after max_time (if it takes as long as the previous one)
+        genstart = time()
+        genstart - start + lastduration > max_time && break
+        alg.generation += 1
+        gen = alg.generation
+
         eliteloss,eliteidx = findmin(alg.loss)
         put!(lossevalqueue, (copy_indiv(alg.pop[eliteidx]), 1)) # also evaluate the elite again (for dynamic fitness function or parameter optimization); elite always occupies slot 1
 
@@ -209,6 +218,7 @@ function evolve!(alg::BasicAlgorithm, generations::Int=100; iter_callback=nothin
         end
 
         isnothing(iter_callback) || @timeit global_timer "iter_callback" with_fit_buffer_cache() do; iter_callback() end
+        lastduration = time() - genstart
     end
     
     close(lossevalqueue) # signal for workers to stop

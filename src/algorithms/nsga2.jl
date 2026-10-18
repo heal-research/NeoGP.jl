@@ -43,6 +43,7 @@ mutable struct NSGA2{T <: AbstractFloat,
     const ranks::Vector{Int}          # Pareto ranks of the population (lower is better)
     const crowdingdistance::Vector{T} # crowding distance values of the population (=manhattan distance to next closest individual in objective space) (higher is better)
     fevals::Int                       # number of function evaluations performed (includes function and gradient evaluations during parameter optimization)
+    generation::Int                   # number of generations run by `evolve!` (counted over all calls, seeds the offspring)
     const seed::Int
     const maxlen::Int
     const popsize::Int
@@ -96,7 +97,7 @@ function NSGA2(fitting_obj_func::LT,
     ranks = Vector{Int}(); sizehint!(ranks, 2 * popsize)
     crowdingdistance = Vector{T}(); sizehint!(crowdingdistance, 2 * popsize)
     
-    alg = NSGA2{T,LT,F2,I}(fitting_obj_func, indiv_loss_func, pop, loss, ranks, crowdingdistance, 0, seed, maxlen, popsize,
+    alg = NSGA2{T,LT,F2,I}(fitting_obj_func, indiv_loss_func, pop, loss, ranks, crowdingdistance, 0, 0, seed, maxlen, popsize,
         tournamentsize, mutation_prob, crossover_prob,
         opcode_list(functionset), opcode_list(terminalset), numvars, threads, maxeval)
     
@@ -164,8 +165,9 @@ function initialize!(alg::NSGA2)
     alg
 end
 
-function evolve!(alg::NSGA2, generations::Int=100; iter_callback=nothing)
+function evolve!(alg::NSGA2, generations::Int=100; iter_callback=nothing, max_time::Real=Inf)
     generations >= 1 || throw(ArgumentError("generations must be >= 1, got $generations"))
+    start = time()
     T = parametertype(alg.fitting_obj_func) # loss value type (e.g., Float64)
     I = eltype(alg.pop)  # individual type
     # we use multi-threaded fitness evaluation workers and communicate via channels
@@ -177,7 +179,14 @@ function evolve!(alg::NSGA2, generations::Int=100; iter_callback=nothing)
 
     children = Vector{I}(undef, alg.popsize)
     childloss = Vector{NTuple{2,T}}(undef, alg.popsize)
-    @timeit global_timer "evolve_generations" for gen in 1:generations
+    lastduration = 0.0 # of the previous generation
+    @timeit global_timer "evolve_generations" for _ in 1:generations
+        # stop before a generation that would end after max_time (if it takes as long as the previous one)
+        genstart = time()
+        genstart - start + lastduration > max_time && break
+        alg.generation += 1
+        gen = alg.generation
+
         # Bound child-generation tasks by the requested worker count.
         ngenworkers = min(alg.nthreads, alg.popsize)
         waitall([Threads.@spawn begin
@@ -223,6 +232,7 @@ function evolve!(alg::NSGA2, generations::Int=100; iter_callback=nothing)
         @timeit global_timer "truncate_population!" truncate_population!(alg, fronts)
         
         isnothing(iter_callback) || @timeit global_timer "iter_callback" with_fit_buffer_cache() do; iter_callback() end
+        lastduration = time() - genstart
     end
     
     

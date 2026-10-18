@@ -14,11 +14,18 @@ abstract type AbstractAlgorithm end
 
 
 """
-    evolve!(alg::AbstractAlgorithm, generations = 100; iter_callback = nothing) -> alg
+    evolve!(alg::AbstractAlgorithm, generations = 100; iter_callback = nothing, max_time = Inf) -> alg
 
 Run `generations` generations of `alg`, which must have been initialized with
 [`initialize!`](@ref).  The optional `iter_callback`, a function without
 arguments, is called after every generation.
+
+`max_time` limits the run time of the call in seconds: a generation is not
+started if it would end after `max_time` when it takes as long as the previous
+generation (no generation is run if `max_time <= 0`).  `alg.generation` counts the
+generations run over all calls of `evolve!`.  The offspring of a seeded algorithm
+are seeded by the generation count, so `evolve!(alg, a); evolve!(alg, b)` continues
+the run like `evolve!(alg, a + b)`.
 """
 function evolve! end
 

@@ -76,6 +76,10 @@ POW,POWABS,EXP,LOG,LOGABS,SQRT,SQRTABS,SQR,SIN,COS,TAN,SINH,COSH,TANH)"
         "--logscale"
             help = "Log10-scale the inputs (x), the target (y), or both (xy) of the data. The model is still defined on the original scale and the data must be positive"
             default = ""
+        "--max-time"
+            help = "Maximum run time in seconds (default: no limit). No generation is started that would end after the limit if it takes as long as the previous one"
+            arg_type = Float64
+            default = Inf
         "--maxeval"
             help = "Maximum number of objective evaluations of each parameter fit, counted like fevals: residual evaluations of Levenberg-Marquardt for the Gaussian likelihood (default: 20; 50 can give better models at about twice the runtime), evaluations of the objective and its gradient of NLopt for the other likelihoods (default: 300)"
             arg_type = Int
@@ -139,6 +143,7 @@ POW,POWABS,EXP,LOG,LOGABS,SQRT,SQRTABS,SQR,SIN,COS,TAN,SINH,COSH,TANH)"
     popsize = parsed["popsize"]
     tournamentsize = parsed["tournamentsize"]
     maxlen = parsed["maxlen"]
+    max_time = parsed["max-time"]
     generations >= 1 || throw(ArgumentError("generations must be >= 1, got $generations"))
     
     objective = lowercase(parsed["objective"])
@@ -301,10 +306,12 @@ POW,POWABS,EXP,LOG,LOGABS,SQRT,SQRTABS,SQR,SIN,COS,TAN,SINH,COSH,TANH)"
     
     LinearAlgebra.BLAS.set_num_threads(1) # avoid BLAS multithreading conflicts
 
+    start = time()
     NeoGP.initialize!(gp)
     callback() # report for initial population
     if generations > 1
-        NeoGP.evolve!(gp, generations - 1, iter_callback = callback)
+        max_time -= time() - start # account for time spent in initialization and first callback
+        NeoGP.evolve!(gp, generations - 1, iter_callback = callback, max_time = max_time)
     end
     timer_requested && TimerOutputs.print_timer(NeoGP.global_timer)
 

@@ -68,6 +68,39 @@ end
     end
 end
 
+@testset "Generations over several calls of evolve! and max_time" begin
+    rng = MersenneTwister(4)
+    X = randn(rng, Float32, 50, 2)
+    y = X[:, 1] .^ 2 .- 2 .* X[:, 2] .+ 0.1f0 .* randn(rng, Float32, 50)
+    lik = NeoGP.GaussianProfiledLikelihood(X, y)
+    for algorithm in (NeoGP.BasicAlgorithm, NeoGP.NSGA2)
+        function run(generations...; kwargs...)
+            gp = redirect_stdout(devnull) do
+                algorithm(lik, size(X, 2); seed = 5, popsize = 20, maxlen = 20, threads = 1)
+            end
+            NeoGP.initialize!(gp)
+            foreach(g -> NeoGP.evolve!(gp, g; kwargs...), generations)
+            gp
+        end
+        front(gp) = [(NeoGP.tostring(i), l) for (i, l) in NeoGP.best_individuals(gp)]
+
+        # the offspring are seeded by the generation count over all calls
+        gp = run(4)
+        @test gp.generation == 4
+        @test front(run(1, 1, 2)) == front(gp)
+        @test front(run(2, 2)) == front(gp)
+        @test front(run(4)) == front(gp)
+
+        # no generation if max_time is exceeded, otherwise at least one
+        @test run(5; max_time = 0).generation == 0
+        @test run(5; max_time = -1).generation == 0
+        @test run(5; max_time = 1e9).generation == 5
+        t = @elapsed gp = run(10^6; max_time = 2.0)
+        @test 1 <= gp.generation < 10^6
+        @test t < 10
+    end
+end
+
 @testset "Limit of the parameter fits" begin
     rng = MersenneTwister(1)
     X = randn(rng, Float32, 200, 2)
